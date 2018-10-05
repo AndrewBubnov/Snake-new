@@ -1,0 +1,137 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.container{
+    width: 600px;
+    height: 600px;
+    outline: 5px solid #ffe4c4;
+    display: flex;
+    flex-wrap: wrap;
+}
+.cell{
+    width: 30px;
+    height: 30px;
+    border: 1px dotted #FFE4B5;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.head{
+    width: 30px;
+    height: 100%;
+    background-size: contain;
+    background: url("../img/snake-head.svg") center center no-repeat;
+}
+.green{
+    filter: hue-rotate(220deg) saturate(5) brightness(110%);
+}
+.snake{
+    width: 20px;
+    height: 20px;
+    background-color: #32127A;
+    border-radius: 20%;
+}
+.apple{
+    width: 26px;
+    height: 30px;
+    background-size: contain;
+    background: url("../img/apple.svg") center center no-repeat;
+}
+.stone{
+    width: 30px;
+    height: 25px;
+    background-size: contain;
+    background: url("../img/stones.svg") center center no-repeat;
+}
+
+.button{
+    width: 100px;
+    height: 30px;
+    border: 2px solid #FFBC70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.button:hover{
+    color: #fff;
+}
+.button:hover:before {
+    left: 50%;
+}
+.button:hover:after {
+    left: 0;
+}
+.button:before{
+    content: "";
+    background-color: #FFBC70;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: 100%;
+    z-index: 0;
+    transition: left .2s ease-out;
+}
+.button:after{
+    content: "";
+    background-color: #FFBC70;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: -50%;
+    z-index: 0;
+    transition: left .2s ease-out;
+}
+.line{
+    width: 100%;
+    height: 100%;
+    color: #FFBC70;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    user-select: none;
+}
+.line:hover{
+    color: #fff;
+}
+.flipLeft{
+    transform: scaleX(-1);
+}
+.turnUp{
+    transform: rotate(-90deg);
+}
+.turnDown{
+    transform: rotate(90deg);
+}
+.button-container{
+    width: 400px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.score{
+    width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFBC70;
+    font-size: 24px;
+    font-family: sans-serif;
+}
