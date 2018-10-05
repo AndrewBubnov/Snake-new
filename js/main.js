@@ -172,7 +172,7 @@ function move(start, finish, stone) {
         console.log("can't reach apple, going after tail");
         finish = new Node(snakeBody[snakeBody.length - 2].x, snakeBody[snakeBody.length - 2].y);
         let array = snakeBody.slice(0, snakeBody.length - 2);
-        array.push(snakeBody[snakeBody.length - 1]);
+        array.push(snakeBody[snakeBody.length - 1], stone[0]);
         steps = bfs(start, finish, array);
     }
     else {
@@ -228,7 +228,7 @@ function move(start, finish, stone) {
         currentHead = nextStep;
         if (start.equals(finish)) {
             $('.apple').remove();
-            // $('.stone').remove();
+
             clearInterval(interval);
 
             let bodyX = moves[moves.length - snakeLength].x;
@@ -247,7 +247,7 @@ function move(start, finish, stone) {
 
             main(start);
         }
-    }, 1000);
+    }, 100);
 }
 
 function allowedPlace(start) {
