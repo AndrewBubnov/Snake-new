@@ -126,7 +126,25 @@ function move(start, finish, stone) {
         variables.setMoves(moves);
         let steps = bfs(start, finish, stone);
 
-        let tail = moves.concat(steps[0]);
+        let tail = moves;
+        moves.concat(steps[0]);
+        // if (steps[0].x === -1) {
+        //     if (moves[moves.length - 1].x < start.x && moves[moves.length - 1].y === start.y && !restrictedPlace(start.x + 1, start.y, start, stone)){
+        //         moves.concat(new Node(start.x + 1, start.y));
+        //     }
+        //     else if (moves[moves.length - 1].x > start.x && moves[moves.length - 1].y === start.y && !restrictedPlace(start.x - 1, start.y, start, stone)){
+        //         moves.concat(new Node(start.x + 1, start.y));
+        //     }
+        //     else if (moves[moves.length - 1].x === start.x && moves[moves.length - 1].y < start.y && !restrictedPlace(start.x, start.y + 1, start, stone)){
+        //         moves.concat(new Node(start.x + 1, start.y));
+        //     }
+        //     else if (moves[moves.length - 1].x === start.x && moves[moves.length - 1].y > start.y && !restrictedPlace(start.x, start.y - 1, start, stone)){
+        //         moves.concat(new Node(start.x + 1, start.y));
+        //     }
+        //
+        //     console.log('TEST');
+        // }
+
 
         let tempStone = tail.slice(tail.length - snakeLength + 1);
         tempStone.push(stone[0]);
@@ -134,17 +152,18 @@ function move(start, finish, stone) {
         let tempSearch;
 
         if (snakeLength > 1){
+
             if (snakeBody.length > 0 && steps[0].x === - 1 && steps[0].y === - 1){
 
                 console.log("can't reach apple, going after tail");
-                finish = new Node(snakeBody[snakeBody.length - 1].x, snakeBody[snakeBody.length - 1].y);
-                if (start.equals(finish)){
-                    console.log('start = ' + start);
-                    debugger;
-                }
-                // finish = tail[tail.length - snakeLength - 1];
-                let array = snakeBody.slice(0, snakeBody.length - 2);
+
+                finish = tail[tail.length - snakeLength - 1];
+                if (start.equals(finish)) finish = new Node(snakeBody[snakeBody.length - 1].x, snakeBody[snakeBody.length - 1].y);
+                let array = snakeBody.slice(0, snakeBody.length - 1);
                 array.push(stone[0]);
+                console.log('start = ' + start);
+                console.log('finish = ' + finish);
+                console.log('last piece = ' + new Node(snakeBody[snakeBody.length - 1].x, snakeBody[snakeBody.length - 1].y));
                 steps = bfs(start, finish, array);
 
             } else {
@@ -153,18 +172,15 @@ function move(start, finish, stone) {
                 if (tempSearch[0].x === -1 && tempSearch[0].y === -1){
                     console.log("can't reach tail after reaching apple, going after tail");
 
-                    finish = new Node(snakeBody[snakeBody.length - 1].x, snakeBody[snakeBody.length - 1].y);
-                    if (start.equals(finish)){
-                        console.log('start = ' + start);
-                        debugger;
-                    }
-                    // finish = tail[tail.length - snakeLength - 1];
+                    finish = tail[tail.length - snakeLength - 1];
+                    if (start.equals(finish)) finish = new Node(snakeBody[snakeBody.length - 1].x, snakeBody[snakeBody.length - 1].y);
                     let array = snakeBody.slice();
                     array.splice(-2, 2).push(stone[0]);
-                    steps = bfs(start, finish, array);
+
                     console.log('start = ' + start);
                     console.log('finish = ' + finish);
-
+                    console.log('last piece = ' + new Node(snakeBody[snakeBody.length - 1].x, snakeBody[snakeBody.length - 1].y));
+                    steps = bfs(start, finish, array);
 
                 } else {
                     console.log("plain search for the apple");
